@@ -14,4 +14,5 @@ Click 'Remove' to Remove that item!
 Simplicity!
 
 How to Install:
-Download the whole repo because I have no idea.
+Download .exe and run it in a folder you desire!
+It will create 4 text files as you use it. 0
