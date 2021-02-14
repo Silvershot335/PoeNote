@@ -15,4 +15,4 @@ Simplicity!
 
 How to Install:
 Download .exe and run it in a folder you desire!
-It will create 4 text files as you use it. 0
+It will create 4 text files as you use it. 
