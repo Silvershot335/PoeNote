@@ -1,5 +1,13 @@
 import tkinter
 
+'''
+To Do
+-The Button Stuff- figure out how to make dynamic button lists
+-Radio buttons for tabs
+-customizeable tab names
+'''
+
+
 #setup our root process
 root = tkinter.Tk()
 root.title('PoE Notes')
