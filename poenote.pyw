@@ -2,7 +2,7 @@ import tkinter
 
 '''
 To Do
--The Button Stuff- figure out how to make dynamic button lists
+-The Button Stuff- figure out how to make dynamic button lists--- maybe dont do this after all?
 -Radio buttons for tabs
 -customizeable tab names
 '''
@@ -19,7 +19,7 @@ userNote.pack()
 #create our frame widget
 frameWidget = tkinter.Frame(root)
 
-#create function to call on launch- reads file, splits into array, creates labels for each line
+#create function to call on launch- reads file, splits into array, creates text-fields for each line
 def onStart():
 	fileCreate = open('./one.txt', 'a')
 	fileCreate.close()
@@ -27,12 +27,16 @@ def onStart():
 	fileArray = fileRead.read().split('\n')
 	for x in fileArray:
 		frameWidget.pack()
-		tkinter.Label(frameWidget, text=x).pack()
+		w = tkinter.Text(frameWidget, height=1, width=40, borderwidth=0)
+		w.configure(bg=root.cget('bg'), relief="flat", state='disabled')
+		w.insert(1.0, x)
+		w.pack()
+
 
 #calls the startup function
 onStart()
 
-#create function to add user input to the end of the array and save it to the file. then adds a label with the user input to the end
+#create function to add user input to the end of the array and save it to the file. then adds a text-field with the user input to the end
 def Save():
 	userText = userNote.get()
 	fileRead = open(f'./{tab}.txt', 'r')
@@ -46,13 +50,17 @@ def Save():
 		fileAppend.write(arrayJoin)
 		fileAppend.close
 		frameWidget.pack()
-		tkinter.Label(frameWidget, text=userText).pack()
+		w = tkinter.Text(frameWidget, height=1, width=40, borderwidth=0)
+		w.insert(1.0, userText)
+		w.configure(bg=root.cget('bg'), relief="flat", state='disabled')
+		w.pack()
 
-#creates a function to remove a matching array object with a user input, then redeploys the labels
+#creates a function to remove a matching array object with a user input, then redeploys the text-fields
 def Remove():
 	userText = userNote.get()
 	fileRead = open(f'./{tab}.txt', 'r')
 	fileArray = fileRead.read().split('\n')
+	w = tkinter.Text(frameWidget, height=1, width=40, borderwidth=0)
 	if userText in fileArray:
 		fileArray.remove(userText)
 		arrayJoin = '\n'.join(fileArray)
@@ -64,9 +72,12 @@ def Remove():
 			l.destroy()
 		for x in fileArray:
 			frameWidget.pack()
-			tkinter.Label(frameWidget, text=x).pack(side='bottom')
+			w = tkinter.Text(frameWidget, height=1, width=40, borderwidth=0)
+			w.insert(1.0, x)
+			w.configure(bg=root.cget('bg'), relief="flat", state='disabled')
+			w.pack()
 
-#creates a function that uses the value passed in from thr lambda functions in the tabButtons to then set the  tab global variable and then reset display
+#creates a function that uses the value passed in from the lambda functions in the tabButtons to then set the tab global variable and then reset display
 def TabSelect(value):
 	global tab
 	tab = value
@@ -80,7 +91,11 @@ def TabSelect(value):
 		l.destroy()
 	for x in fileArray:
 		frameWidget.pack()
-		tkinter.Label(frameWidget, text=x).pack(side='bottom')
+		w = tkinter.Text(frameWidget, height=1, width=40, borderwidth=0)
+		w.insert(1.0, x)
+		w.configure(bg=root.cget('bg'), relief="flat", state='disabled')
+		w.pack()
+
 	
 
 #create our buttons 
