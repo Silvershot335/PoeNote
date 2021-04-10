@@ -1,4 +1,5 @@
 import tkinter
+from PIL import ImageTk,Image 
 
 '''
 To Do
@@ -13,7 +14,7 @@ root = tkinter.Tk()
 root.title('PoE Notes')
 
 #create our input field
-userNote = tkinter.Entry(root, width=55, borderwidth=5)
+userNote = tkinter.Entry(root, width=60, borderwidth=5)
 userNote.pack()
 
 #create our frame widget
@@ -96,21 +97,49 @@ def TabSelect(value):
 		w.configure(bg=root.cget('bg'), relief="flat", state='disabled')
 		w.pack()
 
+#creates a function that deletes all previous texts and then creates a label with the supplied image
+def ImageViewer(value):
+	packDelete =  frameWidget.pack_slaves()
+	for l in packDelete:
+		l.destroy()
+	nameImage = f'{value}.png'
+	image1 = Image.open(nameImage)
+	test = ImageTk.PhotoImage(image1)
+	label1 = tkinter.Label(frameWidget, image=test)
+	label1.image = test
+	label1.pack()
+
 	
+	
+	
+#create frames for button positions
+filler =  tkinter.Frame(root)
+filler.pack(side='top')
+filler2 = tkinter.Frame(root)
+filler2.pack()
+filler3 = tkinter.Frame(root)
+filler3.pack()
+
 
 #create our buttons 
-saveButton = tkinter.Button(root, width=47, borderwidth=5, text="Save", command=Save)
+saveButton = tkinter.Button(filler, width=50, borderwidth=5, text="Save", command=Save)
 saveButton.pack()
-removeButton = tkinter.Button(root, width=47, borderwidth=5, text='Remove', command=Remove)
+removeButton = tkinter.Button(filler, width=50, borderwidth=5, text='Remove', command=Remove)
 removeButton.pack()
-tabOne = tkinter.Button(root, width=10, borderwidth=5, text="Page 1", command=lambda *args: TabSelect('one'))
+
+tabOne = tkinter.Button(filler2, width=11, borderwidth=5, text="Page 1", command=lambda *args: TabSelect('one'))
 tabOne.pack(side='left')
-tabTwo = tkinter.Button(root, width=10, borderwidth=5, text="Page 2", command=lambda *args: TabSelect('two'))
+tabTwo = tkinter.Button(filler2, width=11, borderwidth=5, text="Page 2", command=lambda *args: TabSelect('two'))
 tabTwo.pack(side='left')
-tabThree = tkinter.Button(root, width=10, borderwidth=5, text="Page 3", command=lambda *args: TabSelect('three'))
+tabThree = tkinter.Button(filler2, width=10, borderwidth=5, text="Page 3", command=lambda *args: TabSelect('three'))
 tabThree.pack(side='left')
-tabFour = tkinter.Button(root, width=10, borderwidth=5, text="Page 4", command=lambda *args: TabSelect('four'))
+tabFour = tkinter.Button(filler2, width=11, borderwidth=5, text="Page 4", command=lambda *args: TabSelect('four'))
 tabFour.pack(side='left')
+
+imageTab1 = tkinter.Button(filler3, width=24, borderwidth=5, text="Uber Lab", command=lambda *args: ImageViewer('lab'))
+imageTab1.pack(side='left')
+imageTab2 = tkinter.Button(filler3, width=24, borderwidth=5, text="Leveling Crafts", command=lambda *args: ImageViewer('leveling'))
+imageTab2.pack(side='left')
 
 #create our mainloop
 root.mainloop()
